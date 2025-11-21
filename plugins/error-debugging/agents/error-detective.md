@@ -1,7 +1,44 @@
 ---
 name: error-detective
-description: Search logs and codebases for error patterns, stack traces, and anomalies. Correlates errors across systems and identifies root causes. Use PROACTIVELY when debugging issues, analyzing logs, or investigating production errors.
-model: haiku
+description: "Search logs and codebases for error patterns, stack traces, and anomalies. Correlates errors across systems and identifies root causes. Use PROACTIVELY when debugging issues, analyzing logs, or investigating production errors."
+model: claude-3-haiku-20240307
+type: agent
+kind: agent
+category: via_orchestrator
+source: claude
+version: "1.0.0"
+tags:
+  - error-debugging
+capabilities:
+  - analysis
+  - codegen
+  - testing
+prompt_hint: "Provide task context, constraints, and desired outputs for error-detective."
+execution_spec:
+  model: claude-3-haiku-20240307
+  temperature: 0.2
+  max_tokens: 2000
+  stream: false
+rpc_method: agents.error-detective.invoke
+model_variants:
+  - tier: fast
+    model: claude-3-haiku-20240307
+    use_case: quick iterations, context refreshing, and low-latency checks
+  - tier: balanced
+    model: claude-3-5-sonnet-20240620
+    use_case: high-quality general purpose reasoning and coding
+  - tier: deep
+    model: claude-3-opus-20240229
+    use_case: complex reasoning, exhaustive reviews, and long-form synthesis
+relationships:
+  collaborators:
+    - context-manager
+  workflows:
+    - name: contextualized-execution
+      steps:
+        - context-manager.prepare-context
+        - error-detective.execute
+        - context-manager.summarize-findings
 ---
 
 You are an error detective specializing in log analysis and pattern recognition.

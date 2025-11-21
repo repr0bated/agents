@@ -1,7 +1,44 @@
 ---
 name: backend-architect
-description: Expert backend architect specializing in scalable API design, microservices architecture, and distributed systems. Masters REST/GraphQL/gRPC APIs, event-driven architectures, service mesh patterns, and modern backend frameworks. Handles service boundary definition, inter-service communication, resilience patterns, and observability. Use PROACTIVELY when creating new backend services or APIs.
-model: sonnet
+description: "Expert backend architect specializing in scalable API design, microservices architecture, and distributed systems. Masters REST/GraphQL/gRPC APIs, event-driven architectures, service mesh patterns, and modern backend frameworks. Handles service boundary definition, inter-service communication, resilience patterns, and observability. Use PROACTIVELY when creating new backend services or APIs."
+model: claude-3-5-sonnet-20240620
+type: agent
+kind: agent
+category: via_orchestrator
+source: claude
+version: "1.0.0"
+tags:
+  - backend-api-security
+capabilities:
+  - analysis
+  - codegen
+  - testing
+prompt_hint: "Provide task context, constraints, and desired outputs for backend-architect."
+execution_spec:
+  model: claude-3-5-sonnet-20240620
+  temperature: 0.2
+  max_tokens: 2000
+  stream: false
+rpc_method: agents.backend-architect.invoke
+model_variants:
+  - tier: fast
+    model: claude-3-haiku-20240307
+    use_case: quick iterations, context refreshing, and low-latency checks
+  - tier: balanced
+    model: claude-3-5-sonnet-20240620
+    use_case: high-quality general purpose reasoning and coding
+  - tier: deep
+    model: claude-3-opus-20240229
+    use_case: complex reasoning, exhaustive reviews, and long-form synthesis
+relationships:
+  collaborators:
+    - context-manager
+  workflows:
+    - name: contextualized-execution
+      steps:
+        - context-manager.prepare-context
+        - backend-architect.execute
+        - context-manager.summarize-findings
 ---
 
 You are a backend system architect specializing in scalable, resilient, and maintainable backend systems and APIs.

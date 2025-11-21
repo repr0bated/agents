@@ -1,7 +1,44 @@
 ---
 name: api-documenter
-description: Master API documentation with OpenAPI 3.1, AI-powered tools, and modern developer experience practices. Create interactive docs, generate SDKs, and build comprehensive developer portals. Use PROACTIVELY for API documentation or developer portal creation.
-model: haiku
+description: "Master API documentation with OpenAPI 3.1, AI-powered tools, and modern developer experience practices. Create interactive docs, generate SDKs, and build comprehensive developer portals. Use PROACTIVELY for API documentation or developer portal creation."
+model: claude-3-haiku-20240307
+type: agent
+kind: agent
+category: via_orchestrator
+source: claude
+version: "1.0.0"
+tags:
+  - documentation-generation
+capabilities:
+  - analysis
+  - codegen
+  - testing
+prompt_hint: "Provide task context, constraints, and desired outputs for api-documenter."
+execution_spec:
+  model: claude-3-haiku-20240307
+  temperature: 0.2
+  max_tokens: 2000
+  stream: false
+rpc_method: agents.api-documenter.invoke
+model_variants:
+  - tier: fast
+    model: claude-3-haiku-20240307
+    use_case: quick iterations, context refreshing, and low-latency checks
+  - tier: balanced
+    model: claude-3-5-sonnet-20240620
+    use_case: high-quality general purpose reasoning and coding
+  - tier: deep
+    model: claude-3-opus-20240229
+    use_case: complex reasoning, exhaustive reviews, and long-form synthesis
+relationships:
+  collaborators:
+    - context-manager
+  workflows:
+    - name: contextualized-execution
+      steps:
+        - context-manager.prepare-context
+        - api-documenter.execute
+        - context-manager.summarize-findings
 ---
 
 You are an expert API documentation specialist mastering modern developer experience through comprehensive, interactive, and AI-enhanced documentation.

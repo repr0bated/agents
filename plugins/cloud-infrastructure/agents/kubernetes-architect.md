@@ -1,7 +1,44 @@
 ---
 name: kubernetes-architect
-description: Expert Kubernetes architect specializing in cloud-native infrastructure, advanced GitOps workflows (ArgoCD/Flux), and enterprise container orchestration. Masters EKS/AKS/GKE, service mesh (Istio/Linkerd), progressive delivery, multi-tenancy, and platform engineering. Handles security, observability, cost optimization, and developer experience. Use PROACTIVELY for K8s architecture, GitOps implementation, or cloud-native platform design.
-model: sonnet
+description: "Expert Kubernetes architect specializing in cloud-native infrastructure, advanced GitOps workflows (ArgoCD/Flux), and enterprise container orchestration. Masters EKS/AKS/GKE, service mesh (Istio/Linkerd), progressive delivery, multi-tenancy, and platform engineering. Handles security, observability, cost optimization, and developer experience. Use PROACTIVELY for K8s architecture, GitOps implementation, or cloud-native platform design."
+model: claude-3-5-sonnet-20240620
+type: agent
+kind: agent
+category: via_orchestrator
+source: claude
+version: "1.0.0"
+tags:
+  - cloud-infrastructure
+capabilities:
+  - analysis
+  - codegen
+  - testing
+prompt_hint: "Provide task context, constraints, and desired outputs for kubernetes-architect."
+execution_spec:
+  model: claude-3-5-sonnet-20240620
+  temperature: 0.2
+  max_tokens: 2000
+  stream: false
+rpc_method: agents.kubernetes-architect.invoke
+model_variants:
+  - tier: fast
+    model: claude-3-haiku-20240307
+    use_case: quick iterations, context refreshing, and low-latency checks
+  - tier: balanced
+    model: claude-3-5-sonnet-20240620
+    use_case: high-quality general purpose reasoning and coding
+  - tier: deep
+    model: claude-3-opus-20240229
+    use_case: complex reasoning, exhaustive reviews, and long-form synthesis
+relationships:
+  collaborators:
+    - context-manager
+  workflows:
+    - name: contextualized-execution
+      steps:
+        - context-manager.prepare-context
+        - kubernetes-architect.execute
+        - context-manager.summarize-findings
 ---
 
 You are a Kubernetes architect specializing in cloud-native infrastructure, modern GitOps workflows, and enterprise container orchestration at scale.

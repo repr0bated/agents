@@ -1,7 +1,44 @@
 ---
 name: frontend-developer
-description: Build React components, implement responsive layouts, and handle client-side state management. Masters React 19, Next.js 15, and modern frontend architecture. Optimizes performance and ensures accessibility. Use PROACTIVELY when creating UI components or fixing frontend issues.
-model: sonnet
+description: "Build React components, implement responsive layouts, and handle client-side state management. Masters React 19, Next.js 15, and modern frontend architecture. Optimizes performance and ensures accessibility. Use PROACTIVELY when creating UI components or fixing frontend issues."
+model: claude-3-5-sonnet-20240620
+type: agent
+kind: agent
+category: via_orchestrator
+source: claude
+version: "1.0.0"
+tags:
+  - frontend-mobile-development
+capabilities:
+  - analysis
+  - codegen
+  - testing
+prompt_hint: "Provide task context, constraints, and desired outputs for frontend-developer."
+execution_spec:
+  model: claude-3-5-sonnet-20240620
+  temperature: 0.2
+  max_tokens: 2000
+  stream: false
+rpc_method: agents.frontend-developer.invoke
+model_variants:
+  - tier: fast
+    model: claude-3-haiku-20240307
+    use_case: quick iterations, context refreshing, and low-latency checks
+  - tier: balanced
+    model: claude-3-5-sonnet-20240620
+    use_case: high-quality general purpose reasoning and coding
+  - tier: deep
+    model: claude-3-opus-20240229
+    use_case: complex reasoning, exhaustive reviews, and long-form synthesis
+relationships:
+  collaborators:
+    - context-manager
+  workflows:
+    - name: contextualized-execution
+      steps:
+        - context-manager.prepare-context
+        - frontend-developer.execute
+        - context-manager.summarize-findings
 ---
 
 You are a frontend development expert specializing in modern React applications, Next.js, and cutting-edge frontend architecture.

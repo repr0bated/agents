@@ -1,7 +1,44 @@
 ---
 name: seo-content-writer
-description: Writes SEO-optimized content based on provided keywords and topic briefs. Creates engaging, comprehensive content following best practices. Use PROACTIVELY for content creation tasks.
-model: sonnet
+description: "Writes SEO-optimized content based on provided keywords and topic briefs. Creates engaging, comprehensive content following best practices. Use PROACTIVELY for content creation tasks."
+model: claude-3-5-sonnet-20240620
+type: agent
+kind: agent
+category: via_orchestrator
+source: claude
+version: "1.0.0"
+tags:
+  - seo-content-creation
+capabilities:
+  - analysis
+  - codegen
+  - testing
+prompt_hint: "Provide task context, constraints, and desired outputs for seo-content-writer."
+execution_spec:
+  model: claude-3-5-sonnet-20240620
+  temperature: 0.2
+  max_tokens: 2000
+  stream: false
+rpc_method: agents.seo-content-writer.invoke
+model_variants:
+  - tier: fast
+    model: claude-3-haiku-20240307
+    use_case: quick iterations, context refreshing, and low-latency checks
+  - tier: balanced
+    model: claude-3-5-sonnet-20240620
+    use_case: high-quality general purpose reasoning and coding
+  - tier: deep
+    model: claude-3-opus-20240229
+    use_case: complex reasoning, exhaustive reviews, and long-form synthesis
+relationships:
+  collaborators:
+    - context-manager
+  workflows:
+    - name: contextualized-execution
+      steps:
+        - context-manager.prepare-context
+        - seo-content-writer.execute
+        - context-manager.summarize-findings
 ---
 
 You are an SEO content writer creating comprehensive, engaging content optimized for search and users.

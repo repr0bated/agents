@@ -1,7 +1,44 @@
 ---
 name: seo-snippet-hunter
-description: Formats content to be eligible for featured snippets and SERP features. Creates snippet-optimized content blocks based on best practices. Use PROACTIVELY for question-based content.
-model: haiku
+description: "Formats content to be eligible for featured snippets and SERP features. Creates snippet-optimized content blocks based on best practices. Use PROACTIVELY for question-based content."
+model: claude-3-haiku-20240307
+type: agent
+kind: agent
+category: via_orchestrator
+source: claude
+version: "1.0.0"
+tags:
+  - seo-technical-optimization
+capabilities:
+  - analysis
+  - codegen
+  - testing
+prompt_hint: "Provide task context, constraints, and desired outputs for seo-snippet-hunter."
+execution_spec:
+  model: claude-3-haiku-20240307
+  temperature: 0.2
+  max_tokens: 2000
+  stream: false
+rpc_method: agents.seo-snippet-hunter.invoke
+model_variants:
+  - tier: fast
+    model: claude-3-haiku-20240307
+    use_case: quick iterations, context refreshing, and low-latency checks
+  - tier: balanced
+    model: claude-3-5-sonnet-20240620
+    use_case: high-quality general purpose reasoning and coding
+  - tier: deep
+    model: claude-3-opus-20240229
+    use_case: complex reasoning, exhaustive reviews, and long-form synthesis
+relationships:
+  collaborators:
+    - context-manager
+  workflows:
+    - name: contextualized-execution
+      steps:
+        - context-manager.prepare-context
+        - seo-snippet-hunter.execute
+        - context-manager.summarize-findings
 ---
 
 You are a featured snippet optimization specialist formatting content for position zero potential.

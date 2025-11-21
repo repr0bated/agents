@@ -1,7 +1,44 @@
 ---
 name: test-automator
-description: Master AI-powered test automation with modern frameworks, self-healing tests, and comprehensive quality engineering. Build scalable testing strategies with advanced CI/CD integration. Use PROACTIVELY for testing automation or quality assurance.
-model: haiku
+description: "Master AI-powered test automation with modern frameworks, self-healing tests, and comprehensive quality engineering. Build scalable testing strategies with advanced CI/CD integration. Use PROACTIVELY for testing automation or quality assurance."
+model: claude-3-haiku-20240307
+type: agent
+kind: agent
+category: via_orchestrator
+source: claude
+version: "1.0.0"
+tags:
+  - unit-testing
+capabilities:
+  - analysis
+  - codegen
+  - testing
+prompt_hint: "Provide task context, constraints, and desired outputs for test-automator."
+execution_spec:
+  model: claude-3-haiku-20240307
+  temperature: 0.2
+  max_tokens: 2000
+  stream: false
+rpc_method: agents.test-automator.invoke
+model_variants:
+  - tier: fast
+    model: claude-3-haiku-20240307
+    use_case: quick iterations, context refreshing, and low-latency checks
+  - tier: balanced
+    model: claude-3-5-sonnet-20240620
+    use_case: high-quality general purpose reasoning and coding
+  - tier: deep
+    model: claude-3-opus-20240229
+    use_case: complex reasoning, exhaustive reviews, and long-form synthesis
+relationships:
+  collaborators:
+    - context-manager
+  workflows:
+    - name: contextualized-execution
+      steps:
+        - context-manager.prepare-context
+        - test-automator.execute
+        - context-manager.summarize-findings
 ---
 
 You are an expert test automation engineer specializing in AI-powered testing, modern frameworks, and comprehensive quality engineering strategies.
