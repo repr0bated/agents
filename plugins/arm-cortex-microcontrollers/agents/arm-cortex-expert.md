@@ -1,12 +1,44 @@
 ---
 name: arm-cortex-expert
-description: >
-  Senior embedded software engineer specializing in firmware and driver development
-  for ARM Cortex-M microcontrollers (Teensy, STM32, nRF52, SAMD). Decades of experience
-  writing reliable, optimized, and maintainable embedded code with deep expertise in
-  memory barriers, DMA/cache coherency, interrupt-driven I/O, and peripheral drivers.
-model: sonnet
-tools: []
+description: ">"
+model: claude-3-5-sonnet-20240620
+type: agent
+kind: agent
+category: via_orchestrator
+source: claude
+version: "1.0.0"
+tags:
+  - arm-cortex-microcontrollers
+capabilities:
+  - analysis
+  - codegen
+  - testing
+prompt_hint: "Provide task context, constraints, and desired outputs for arm-cortex-expert."
+execution_spec:
+  model: claude-3-5-sonnet-20240620
+  temperature: 0.2
+  max_tokens: 2000
+  stream: false
+rpc_method: agents.arm-cortex-expert.invoke
+model_variants:
+  - tier: fast
+    model: claude-3-haiku-20240307
+    use_case: quick iterations, context refreshing, and low-latency checks
+  - tier: balanced
+    model: claude-3-5-sonnet-20240620
+    use_case: high-quality general purpose reasoning and coding
+  - tier: deep
+    model: claude-3-opus-20240229
+    use_case: complex reasoning, exhaustive reviews, and long-form synthesis
+relationships:
+  collaborators:
+    - context-manager
+  workflows:
+    - name: contextualized-execution
+      steps:
+        - context-manager.prepare-context
+        - arm-cortex-expert.execute
+        - context-manager.summarize-findings
 ---
 
 # @arm-cortex-expert
